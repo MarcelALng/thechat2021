@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 
 class WelcomeScreen extends StatelessWidget {
@@ -18,6 +20,25 @@ class WelcomeScreen extends StatelessWidget {
             children: <Widget>[
               Container(
                 child: Image.asset("assets/logo.png"),
+              ),
+              SizedBox(
+                height: 48.0,
+              ),
+              RaisedButton(
+                onPressed: () {},
+                child: Text(
+                  "Se connecter",
+                  style: TextStyle(fontSize: 34.0),
+                ),
+                color: Colors.blueAccent,
+              ),
+              RaisedButton(
+                onPressed: () {},
+                child: Text(
+                  "S'inscrire",
+                  style: TextStyle(fontSize: 34.0),
+                ),
+                color: Colors.blueAccent,
               ),
             ],
           ),
