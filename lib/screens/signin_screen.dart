@@ -1,6 +1,8 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
+
+import 'package:thechat2021/constants/global_constant.dart';
+
+import 'components/appbar_component.dart';
 
 class SigninScreen extends StatelessWidget {
   //const SigninScreen({Key key}) : super(key: key);
@@ -9,14 +11,10 @@ class SigninScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          elevation: 0.0,
-          backgroundColor: Colors.transparent,
-          title: Text(
-            "The Chat: Se connecter",
-            style: TextStyle(color: Colors.white),
-          ),
-        ),
+        appBar: ComponentAppBar(
+          titleAppBar: "The Chat : se connecter",
+        ).build(),
+        backgroundColor: Color(GlobalConstant.colorBackground),
         body: SafeArea(
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 12.0),
@@ -28,7 +26,7 @@ class SigninScreen extends StatelessWidget {
                 children: <Widget>[
                   Flexible(
                     child: Container(
-                      child: Image.asset("assets/logo.png"),
+                      child: Image.asset(GlobalConstant.assetLogo),
                     ),
                   ),
                   SizedBox(

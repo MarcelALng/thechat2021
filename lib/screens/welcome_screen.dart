@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
 
 import 'package:thechat2021/constants/routes_constant.dart';
+import 'package:thechat2021/constants/global_constant.dart';
+
+import 'components/appbar_component.dart';
 
 class WelcomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0.0,
-        title: Text("The Chat 2021", style: TextStyle(color: Colors.white)),
-      ),
-      backgroundColor: Color(0xff4682B4),
+      appBar: ComponentAppBar(
+        titleAppBar: "The Chat : Bienvenue",
+      ).build(),
+      backgroundColor: Color(GlobalConstant.colorBackground),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 12.0),
@@ -21,7 +22,7 @@ class WelcomeScreen extends StatelessWidget {
             children: <Widget>[
               Flexible(
                 child: Container(
-                  child: Image.asset("assets/logo.png"),
+                  child: Image.asset(GlobalConstant.assetLogo),
                 ),
               ),
               SizedBox(
