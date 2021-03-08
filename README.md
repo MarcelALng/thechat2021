@@ -8,7 +8,7 @@ A new Flutter project.
 
 ![Logo Android ](assets/screen_android_logo.png "Logo Android")
 
-![Logo IOS ](assets/screen_android_ISO.png "Logo IOS")
+![Logo IOS ](assets/screen_android_IOS.png "Logo IOS")
 
 
 ## Getting Started
