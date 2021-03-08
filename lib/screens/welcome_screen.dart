@@ -9,6 +9,7 @@ class WelcomeScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0.0,
+        title: Text("The Chat 2021", style: TextStyle(color: Colors.white)),
       ),
       backgroundColor: Color(0xff4682B4),
       body: SafeArea(
@@ -18,24 +19,28 @@ class WelcomeScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
-              Container(
-                child: Image.asset("assets/logo.png"),
+              Flexible(
+                child: Container(
+                  child: Image.asset("assets/logo.png"),
+                ),
               ),
               SizedBox(
                 height: 48.0,
               ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                child: RaisedButton(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(60.0),
+              Flexible(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                  child: RaisedButton(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(60.0),
+                    ),
+                    onPressed: () {},
+                    child: Text(
+                      "Se connecter",
+                      style: TextStyle(fontSize: 34.0),
+                    ),
+                    color: Colors.blueAccent,
                   ),
-                  onPressed: () {},
-                  child: Text(
-                    "Se connecter",
-                    style: TextStyle(fontSize: 34.0),
-                  ),
-                  color: Colors.blueAccent,
                 ),
               ),
               Padding(

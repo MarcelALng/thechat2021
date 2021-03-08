@@ -9,6 +9,7 @@ class TheChatApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      title: "The Chat 2021",
       initialRoute: RoutesConstant.welcome,
       routes: {
         RoutesConstant.welcome: (context) => WelcomeScreen(),
