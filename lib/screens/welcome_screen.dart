@@ -24,21 +24,33 @@ class WelcomeScreen extends StatelessWidget {
               SizedBox(
                 height: 48.0,
               ),
-              RaisedButton(
-                onPressed: () {},
-                child: Text(
-                  "Se connecter",
-                  style: TextStyle(fontSize: 34.0),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                child: RaisedButton(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(60.0),
+                  ),
+                  onPressed: () {},
+                  child: Text(
+                    "Se connecter",
+                    style: TextStyle(fontSize: 34.0),
+                  ),
+                  color: Colors.blueAccent,
                 ),
-                color: Colors.blueAccent,
               ),
-              RaisedButton(
-                onPressed: () {},
-                child: Text(
-                  "S'inscrire",
-                  style: TextStyle(fontSize: 34.0),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                child: RaisedButton(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(60.0),
+                  ),
+                  onPressed: () {},
+                  child: Text(
+                    "S'inscrire",
+                    style: TextStyle(fontSize: 34.0),
+                  ),
+                  color: Colors.blueAccent,
                 ),
-                color: Colors.blueAccent,
               ),
             ],
           ),
