@@ -1,5 +1,7 @@
 # thechat2021
 
+![Logo](assets/logo.png "Logo")
+
 A new Flutter project.
 
 ## Getting Started
