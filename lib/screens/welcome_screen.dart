@@ -1,6 +1,6 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
+
+import 'package:thechat2021/constants/routes_constant.dart';
 
 class WelcomeScreen extends StatelessWidget {
   @override
@@ -34,7 +34,8 @@ class WelcomeScreen extends StatelessWidget {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(60.0),
                     ),
-                    onPressed: () {},
+                    onPressed: () =>
+                        Navigator.pushNamed(context, RoutesConstant.signin),
                     child: Text(
                       "Se connecter",
                       style: TextStyle(fontSize: 34.0),

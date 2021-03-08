@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'constants/routes_constant.dart';
 import 'screens/welcome_screen.dart';
+import 'package:thechat2021/screens/signin_screen.dart';
 
 void main() => runApp(TheChatApp());
 
@@ -14,7 +15,7 @@ class TheChatApp extends StatelessWidget {
       routes: {
         RoutesConstant.welcome: (context) => WelcomeScreen(),
         // RoutesConstant.register: (context) => RegisterScreen(),
-        // RoutesConstant.signing: (context) => SigninScreen(),
+        RoutesConstant.signin: (context) => SigninScreen(),
         // RoutesConstant.userchat: (context) => UserChatScreen(),
         // RoutesConstant.usermain: (context) => UserMainScree(),
         // RoutesConstant.changePassword: (context) => ChangePassword(),
