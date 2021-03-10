@@ -61,8 +61,17 @@ class SigninScreen extends StatelessWidget {
                   //     ),
                   //   ),
                   // ),
-                  ComponentTextFormField(),
-                  TextFormField(),
+                  ComponentTextFormField(
+                    hintText: "Adresse Email",
+                    onSaved: (value) {},
+                  ),
+                  SizedBox(
+                    height: 12.0,
+                  ),
+                  ComponentTextFormField(
+                    hintText: "Mot de passe",
+                    onSaved: (value) {},
+                  ),
                 ],
               ),
             ),

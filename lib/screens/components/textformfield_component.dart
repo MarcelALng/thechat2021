@@ -1,15 +1,23 @@
 import 'package:flutter/material.dart';
 
 class ComponentTextFormField extends StatelessWidget {
+  final String hintText;
+  final void Function(String value) onSaved;
+
+  ComponentTextFormField({
+    @required this.hintText,
+    @required this.onSaved,
+  });
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      onSaved: onSaved,
       decoration: InputDecoration(
         contentPadding: EdgeInsets.symmetric(
           horizontal: 20.0,
           vertical: 10.0,
         ),
-        hintText: "Adresse Email",
+        hintText: hintText,
         hintStyle: TextStyle(color: Colors.white38),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(32.0),
