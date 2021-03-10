@@ -41,23 +41,6 @@ class WelcomeScreen extends StatelessWidget {
                 onPressed: () =>
                     Navigator.pushNamed(context, RoutesConstant.register),
               )
-              // Flexible(
-              //   child:
-              // ),
-              //  Padding(
-              //     padding: const EdgeInsets.symmetric(horizontal: 20.0),
-              //     child: RaisedButton(
-              //       shape: RoundedRectangleBorder(
-              //         borderRadius: BorderRadius.circular(60.0),
-              //       ),
-              //       onPressed: () {},
-              //       child: Text(
-              //         "S'inscrire",
-              //         style: TextStyle(fontSize: 34.0),
-              //       ),
-              //       color: Colors.blueAccent,
-              //     ),
-              //   ),
             ],
           ),
         ),
