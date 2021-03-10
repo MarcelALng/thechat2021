@@ -38,8 +38,10 @@ class WelcomeScreen extends StatelessWidget {
               ),
               ComponentButton(
                 buttonName: "S'inscrire",
-                onPressed: () =>
-                    Navigator.pushNamed(context, RoutesConstant.register),
+                onPressed: () => Navigator.pushNamed(
+                  context,
+                  RoutesConstant.register,
+                ),
               )
             ],
           ),
