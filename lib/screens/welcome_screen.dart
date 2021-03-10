@@ -4,6 +4,7 @@ import 'package:thechat2021/constants/routes_constant.dart';
 import 'package:thechat2021/constants/global_constant.dart';
 
 import 'components/appbar_component.dart';
+import 'components/button_component.dart';
 
 class WelcomeScreen extends StatelessWidget {
   @override
@@ -28,37 +29,35 @@ class WelcomeScreen extends StatelessWidget {
               SizedBox(
                 height: 48.0,
               ),
-              Flexible(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                  child: RaisedButton(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(60.0),
-                    ),
-                    onPressed: () =>
-                        Navigator.pushNamed(context, RoutesConstant.signin),
-                    child: Text(
-                      "Se connecter",
-                      style: TextStyle(fontSize: 34.0),
-                    ),
-                    color: Colors.blueAccent,
-                  ),
+              ComponentButton(
+                buttonName: "Se connecter",
+                onPressed: () => Navigator.pushNamed(
+                  context,
+                  RoutesConstant.signin,
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                child: RaisedButton(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(60.0),
-                  ),
-                  onPressed: () {},
-                  child: Text(
-                    "S'inscrire",
-                    style: TextStyle(fontSize: 34.0),
-                  ),
-                  color: Colors.blueAccent,
-                ),
-              ),
+              ComponentButton(
+                buttonName: "S'inscrire",
+                onPressed: () =>
+                    Navigator.pushNamed(context, RoutesConstant.register),
+              )
+              // Flexible(
+              //   child:
+              // ),
+              //  Padding(
+              //     padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              //     child: RaisedButton(
+              //       shape: RoundedRectangleBorder(
+              //         borderRadius: BorderRadius.circular(60.0),
+              //       ),
+              //       onPressed: () {},
+              //       child: Text(
+              //         "S'inscrire",
+              //         style: TextStyle(fontSize: 34.0),
+              //       ),
+              //       color: Colors.blueAccent,
+              //     ),
+              //   ),
             ],
           ),
         ),
