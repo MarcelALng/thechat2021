@@ -27,9 +27,9 @@ class SigninScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: <Widget>[
                   Flexible(
-                    child: Container(
-                      child: Image.asset(GlobalConstant.assetLogo),
-                    ),
+                    child: Hero(
+                        tag: "logoTag",
+                        child: Image.asset(GlobalConstant.assetLogo)),
                   ),
                   SizedBox(
                     height: 48.0,
@@ -48,9 +48,12 @@ class SigninScreen extends StatelessWidget {
                   SizedBox(
                     height: 24.0,
                   ),
-                  ComponentButton(
-                    buttonName: "Se connecter",
-                    onPressed: () {},
+                  Hero(
+                    tag: "signinLogoTag",
+                    child: ComponentButton(
+                      buttonName: "Se connecter",
+                      onPressed: () {},
+                    ),
                   ),
                 ],
               ),

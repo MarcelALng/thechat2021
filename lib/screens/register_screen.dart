@@ -27,7 +27,8 @@ class RegisterScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: <Widget>[
                   Flexible(
-                    child: Container(
+                    child: Hero(
+                      tag: "logoTag",
                       child: Image.asset(GlobalConstant.assetLogo),
                     ),
                   ),
@@ -48,9 +49,12 @@ class RegisterScreen extends StatelessWidget {
                   SizedBox(
                     height: 10.0,
                   ),
-                  ComponentButton(
-                    buttonName: "S'enregistrer",
-                    onPressed: () {},
+                  Hero(
+                    tag: "registerLogoTag",
+                    child: ComponentButton(
+                      buttonName: "S'enregistrer",
+                      onPressed: () {},
+                    ),
                   )
                 ],
               ),

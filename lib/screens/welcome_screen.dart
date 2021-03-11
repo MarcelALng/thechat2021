@@ -22,25 +22,35 @@ class WelcomeScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
               Flexible(
-                child: Container(
+                child: Hero(
+                  tag: "logoTag",
                   child: Image.asset(GlobalConstant.assetLogo),
                 ),
               ),
               SizedBox(
                 height: 48.0,
               ),
-              ComponentButton(
-                buttonName: "Se connecter",
-                onPressed: () => Navigator.pushNamed(
-                  context,
-                  RoutesConstant.signin,
+              Hero(
+                tag: "signinLogoTag",
+                child: ComponentButton(
+                  buttonName: "Se connecter",
+                  onPressed: () => Navigator.pushNamed(
+                    context,
+                    RoutesConstant.signin,
+                  ),
                 ),
               ),
-              ComponentButton(
-                buttonName: "S'inscrire",
-                onPressed: () => Navigator.pushNamed(
-                  context,
-                  RoutesConstant.register,
+              SizedBox(
+                height: 15.0,
+              ),
+              Hero(
+                tag: "registerLogoTag",
+                child: ComponentButton(
+                  buttonName: "S'inscrire",
+                  onPressed: () => Navigator.pushNamed(
+                    context,
+                    RoutesConstant.register,
+                  ),
                 ),
               )
             ],
