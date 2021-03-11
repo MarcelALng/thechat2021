@@ -7,14 +7,14 @@ import 'package:thechat2021/screens/components/textformfield_component.dart';
 import 'components/appbar_component.dart';
 import 'components/textformfield_component.dart';
 
-class SigninScreen extends StatelessWidget {
+class RegisterScreen extends StatelessWidget {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: ComponentAppBar(
-          titleAppBar: ": se connecter",
+          titleAppBar: " : s'inscrire",
         ).build(),
         backgroundColor: Color(GlobalConstant.colorBackground),
         body: SafeArea(
@@ -39,19 +39,19 @@ class SigninScreen extends StatelessWidget {
                     onSaved: (value) {},
                   ),
                   SizedBox(
-                    height: 12.0,
+                    height: 10.0,
                   ),
                   ComponentTextFormField(
                     hintText: "Mot de passe",
                     onSaved: (value) {},
                   ),
                   SizedBox(
-                    height: 24.0,
+                    height: 10.0,
                   ),
                   ComponentButton(
-                    buttonName: "Se connecter",
+                    buttonName: "S'enregistrer",
                     onPressed: () {},
-                  ),
+                  )
                 ],
               ),
             ),

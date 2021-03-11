@@ -11,7 +11,7 @@ class WelcomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: ComponentAppBar(
-        titleAppBar: "The Chat : Bienvenue",
+        titleAppBar: "",
       ).build(),
       backgroundColor: Color(GlobalConstant.colorBackground),
       body: SafeArea(

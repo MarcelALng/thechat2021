@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 
 import 'constants/routes_constant.dart';
@@ -32,5 +30,5 @@ il charge par défaut RoutesConstant.WelcomeScreen
 qui charge donc WelcomeScreen.dart 
 Ensuite on peut choisir de cliquer sur Signin en cliquan sur RoutesConstant.Signin 
 ou bien Register en cliquant sur RoutesConstant.register 
-
+Tout semble se passer entre  main.dart Welcomescreen.dart et
 */
