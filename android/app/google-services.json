@@ -1,0 +1,40 @@
+// be careful when you download the google service json , should not be renamed 
+{
+  "project_info": {
+    "project_number": "652485658621",
+    "project_id": "thechat202",
+    "storage_bucket": "thechat202.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:652485658621:android:39f2cabcb612d395853b94",
+        "android_client_info": {
+          "package_name": "com.marcelalng.thechat2021"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "652485658621-ric1g98fleoad52t29ut889hk102rore.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyABr2JntmVwkw00cpw8AOmwgQegn7UQPyo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "652485658621-ric1g98fleoad52t29ut889hk102rore.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
