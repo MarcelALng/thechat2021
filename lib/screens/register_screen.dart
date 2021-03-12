@@ -49,6 +49,13 @@ class RegisterScreen extends StatelessWidget {
                   SizedBox(
                     height: 10.0,
                   ),
+                  ComponentTextFormField(
+                    hintText: "Confirmer mot de passe",
+                    onSaved: (value) {},
+                  ),
+                  SizedBox(
+                    height: 10.0,
+                  ),
                   Hero(
                     tag: "registerLogoTag",
                     child: ComponentButton(
