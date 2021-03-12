@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import 'package:thechat2021/constants/global_constant.dart';
@@ -8,6 +9,8 @@ import 'components/appbar_component.dart';
 import 'components/textformfield_component.dart';
 
 class RegisterScreen extends StatelessWidget {
+  final FirebaseAuth _firebase = FirebaseAuth.instance;
+
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
@@ -59,8 +62,19 @@ class RegisterScreen extends StatelessWidget {
                   Hero(
                     tag: "registerLogoTag",
                     child: ComponentButton(
-                      buttonName: "S'enregistrer",
-                      onPressed: () {},
+                      buttonName: "S'inscrire",
+                      onPressed: () async {
+                        try {
+                          final FirebaseUser user =
+                              (await _firebase.createUserWithEmailAndPassword(
+                                      email: "test@test.com",
+                                      password: "testertester"))
+                                  .user;
+                          print(user);
+                        } catch (error) {
+                          print(error);
+                        }
+                      },
                     ),
                   )
                 ],
