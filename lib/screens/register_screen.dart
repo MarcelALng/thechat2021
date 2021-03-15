@@ -70,9 +70,9 @@ class RegisterScreen extends StatelessWidget {
                                       email: "test@test.com",
                                       password: "testertester"))
                                   .user;
-                          print(user);
-                        } catch (error) {
-                          print(error);
+                          print(user); // pour afficher le résultat
+                        } catch (onError) {
+                          print(Error);
                         }
                       },
                     ),
