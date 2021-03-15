@@ -8,6 +8,8 @@ import 'package:thechat2021/screens/components/textformfield_component.dart';
 import 'components/appbar_component.dart';
 import 'components/textformfield_component.dart';
 
+// import 'package:faker/faker.dart'; // to test random email
+
 class RegisterScreen extends StatelessWidget {
   final FirebaseAuth _firebase = FirebaseAuth.instance;
 
@@ -15,6 +17,9 @@ class RegisterScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String email = "";
+    String password = "";
+
     return Scaffold(
         appBar: ComponentAppBar(
           titleAppBar: " : s'inscrire",
@@ -40,14 +45,18 @@ class RegisterScreen extends StatelessWidget {
                   ),
                   ComponentTextFormField(
                     hintText: "Adresse Email",
-                    onSaved: (value) {},
+                    onSaved: (value) {
+                      email = value;
+                    },
                   ),
                   SizedBox(
                     height: 10.0,
                   ),
                   ComponentTextFormField(
                     hintText: "Mot de passe",
-                    onSaved: (value) {},
+                    onSaved: (value) {
+                      password = value;
+                    },
                   ),
                   SizedBox(
                     height: 10.0,
@@ -65,12 +74,15 @@ class RegisterScreen extends StatelessWidget {
                       buttonName: "S'inscrire",
                       onPressed: () async {
                         try {
+                          _formKey.currentState
+                              .save(); // global key to  save data emailuser
                           final FirebaseUser user =
                               (await _firebase.createUserWithEmailAndPassword(
-                                      email: "test@test.com",
-                                      password: "testertester"))
+                                      email: email,
+                                      //faker.internet .email() fake email adresse random
+                                      password: password))
                                   .user;
-                          print(user); // pour afficher le résultat
+                          print(email + "Créé"); // pour afficher le résultat
                         } catch (onError) {
                           print(Error);
                         }
