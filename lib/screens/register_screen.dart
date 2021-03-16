@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:email_validator/email_validator.dart';
 
 import 'package:thechat2021/constants/global_constant.dart';
 import 'package:thechat2021/screens/components/button_component.dart';
@@ -14,6 +15,7 @@ class RegisterScreen extends StatelessWidget {
   final FirebaseAuth _firebase = FirebaseAuth.instance;
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final TextEditingController _passController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -44,6 +46,12 @@ class RegisterScreen extends StatelessWidget {
                     height: 48.0,
                   ),
                   ComponentTextFormField(
+                    validator: (email) {
+                      if (!EmailValidator.validate(email)) {
+                        return "Merci d'entre une adresse email correct.";
+                      }
+                      return null;
+                    },
                     hintText: "Adresse Email",
                     onSaved: (value) {
                       email = value;
@@ -53,6 +61,15 @@ class RegisterScreen extends StatelessWidget {
                     height: 10.0,
                   ),
                   ComponentTextFormField(
+                    controller: _passController,
+                    validator: (mdp) {
+                      if (mdp.length < 6) {
+                        return "Le mot de passe doit contenir au minimim 6 caractères";
+                      } else if (!mdp.contains("@")) {
+                        return "le mot de passe doit contenir un @";
+                      }
+                      return null;
+                    },
                     hintText: "Mot de passe",
                     onSaved: (value) {
                       password = value;
@@ -62,6 +79,14 @@ class RegisterScreen extends StatelessWidget {
                     height: 10.0,
                   ),
                   ComponentTextFormField(
+                    validator: (confirmMdp) {
+                      if (confirmMdp.isEmpty) {
+                        return "Merci de confirmer votre mot de passe.";
+                      } else if (confirmMdp != _passController.text) {
+                        return "La confirmation du mot de passe n'est pas identique";
+                      }
+                      return null;
+                    },
                     hintText: "Confirmer mot de passe",
                     onSaved: (value) {},
                   ),
@@ -74,15 +99,17 @@ class RegisterScreen extends StatelessWidget {
                       buttonName: "S'inscrire",
                       onPressed: () async {
                         try {
-                          _formKey.currentState
-                              .save(); // global key to  save data emailuser
-                          final FirebaseUser user =
-                              (await _firebase.createUserWithEmailAndPassword(
-                                      email: email,
-                                      //faker.internet .email() fake email adresse random
-                                      password: password))
-                                  .user;
-                          print(email + "Créé"); // pour afficher le résultat
+                          if (_formKey.currentState.validate()) {
+                            _formKey.currentState
+                                .save(); // global key to  save data emailuser
+                            final FirebaseUser user =
+                                (await _firebase.createUserWithEmailAndPassword(
+                                        email: email,
+                                        //faker.internet .email() fake email adresse random
+                                        password: password))
+                                    .user;
+                            print(email + " créé"); // pour afficher le résultat
+                          }
                         } catch (onError) {
                           print(Error);
                         }

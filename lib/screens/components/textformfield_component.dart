@@ -3,14 +3,20 @@ import 'package:flutter/material.dart';
 class ComponentTextFormField extends StatelessWidget {
   final String hintText;
   final void Function(String value) onSaved;
+  final void Function(String) validator;
+  final TextEditingController controller;
 
   ComponentTextFormField({
     @required this.hintText,
     @required this.onSaved,
+    this.validator,
+    this.controller,
   });
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      controller: controller ?? null,
+      validator: validator ?? null,
       onSaved: onSaved,
       decoration: InputDecoration(
         contentPadding: EdgeInsets.symmetric(
