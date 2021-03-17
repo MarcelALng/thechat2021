@@ -19,8 +19,8 @@ class RegisterScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String email = "";
-    String password = "";
+    String _email = "";
+    String _password = "";
 
     return Scaffold(
         appBar: ComponentAppBar(
@@ -54,7 +54,7 @@ class RegisterScreen extends StatelessWidget {
                     },
                     hintText: "Adresse Email",
                     onSaved: (value) {
-                      email = value;
+                      _email = value;
                     },
                   ),
                   SizedBox(
@@ -72,7 +72,7 @@ class RegisterScreen extends StatelessWidget {
                     },
                     hintText: "Mot de passe",
                     onSaved: (value) {
-                      password = value;
+                      _password = value;
                     },
                   ),
                   SizedBox(
@@ -104,11 +104,12 @@ class RegisterScreen extends StatelessWidget {
                                 .save(); // global key to  save data emailuser
                             final FirebaseUser user =
                                 (await _firebase.createUserWithEmailAndPassword(
-                                        email: email,
+                                        email: _email,
                                         //faker.internet .email() fake email adresse random
-                                        password: password))
+                                        password: _password))
                                     .user;
-                            print(email + " créé"); // pour afficher le résultat
+                            print(
+                                _email + " créé"); // pour afficher le résultat
                           }
                         } catch (onError) {
                           print(Error);
