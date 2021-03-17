@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 
 class ComponentTextFormField extends StatelessWidget {
@@ -19,6 +21,11 @@ class ComponentTextFormField extends StatelessWidget {
       validator: validator ?? null,
       onSaved: onSaved,
       decoration: InputDecoration(
+        errorBorder: OutlineInputBorder(
+            borderSide: BorderSide(width: 2.5, color: Colors.redAccent[700]),
+            borderRadius: BorderRadius.circular(32.0)),
+        errorStyle: TextStyle(color: Colors.red[700]),
+        errorMaxLines: 2,
         contentPadding: EdgeInsets.symmetric(
           horizontal: 20.0,
           vertical: 10.0,
