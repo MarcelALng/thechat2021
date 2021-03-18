@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:email_validator/email_validator.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:thechat2021/constants/global_constant.dart';
+import 'package:thechat2021/constants/routes_constant.dart';
+
 import 'package:thechat2021/screens/components/button_component.dart';
 import 'package:thechat2021/screens/components/textformfield_component.dart';
 
 import 'components/appbar_component.dart';
 import 'components/textformfield_component.dart';
-
-import 'package:firebase_auth/firebase_auth.dart';
 
 class SigninScreen extends StatelessWidget {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
@@ -40,6 +42,12 @@ class SigninScreen extends StatelessWidget {
                     height: 48.0,
                   ),
                   ComponentTextFormField(
+                    validator: (email) {
+                      if (!EmailValidator.validate(email)) {
+                        return "l'adresse email est invalide";
+                      }
+                      return null;
+                    },
                     hintText: "Adresse Email",
                     onSaved: (emailSaved) {
                       _email = emailSaved;
@@ -49,6 +57,14 @@ class SigninScreen extends StatelessWidget {
                     height: 12.0,
                   ),
                   ComponentTextFormField(
+                    validator: (mdp) {
+                      if (mdp.length < 6) {
+                        return "Le mot de passe doit contenir au minimum 6 caracteres.";
+                      } else if (!mdp.contains("@")) {
+                        return "le mot de passe doit contenir un @.";
+                      }
+                      return null; // to check if connection ok or not;
+                    },
                     hintText: "Mot de passe",
                     onSaved: (passwordSaved) {
                       _password = passwordSaved;
@@ -62,12 +78,16 @@ class SigninScreen extends StatelessWidget {
                     child: ComponentButton(
                       buttonName: "Se connecter",
                       onPressed: () async {
-                        _formKey.currentState.save();
+                        if (_formKey.currentState.validate()) {
+                          _formKey.currentState.save();
+                        }
                         try {
                           final FirebaseUser user =
                               (await _firebase.signInWithEmailAndPassword(
                                       email: _email, password: _password))
                                   .user;
+                          Navigator.pushReplacementNamed(
+                              context, RoutesConstant.userHome);
                           print(user);
                         } catch (error) {
                           print(error);
