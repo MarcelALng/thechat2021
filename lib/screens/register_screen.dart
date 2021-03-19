@@ -5,6 +5,7 @@ import 'package:email_validator/email_validator.dart';
 import 'package:thechat2021/constants/global_constant.dart';
 import 'package:thechat2021/screens/components/button_component.dart';
 import 'package:thechat2021/screens/components/textformfield_component.dart';
+import 'package:thechat2021/constants/routes_constant.dart';
 
 import 'components/appbar_component.dart';
 import 'components/textformfield_component.dart';
