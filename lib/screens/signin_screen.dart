@@ -86,8 +86,11 @@ class SigninScreen extends StatelessWidget {
                               (await _firebase.signInWithEmailAndPassword(
                                       email: _email, password: _password))
                                   .user;
-                          Navigator.pushReplacementNamed(
-                              context, RoutesConstant.userHome);
+                          Navigator.pushNamedAndRemoveUntil(
+                              // avoid route to go out of screen
+                              context,
+                              RoutesConstant.userHome,
+                              (Route<dynamic> route) => false);
                           print(user);
                         } catch (error) {
                           print(error);

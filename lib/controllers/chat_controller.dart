@@ -11,10 +11,12 @@ class ChatController {
   Future<FirebaseUser> checkIdentity(BuildContext context) async {
     final FirebaseUser _user = await _firebase.currentUser();
     if (_user == null) {
+      print(_user);
       Navigator.pushReplacementNamed(context, RoutesConstant.welcome);
     } else {
       _activeUser = _user;
     }
+    print(_activeUser);
     return _activeUser;
   }
 

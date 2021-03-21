@@ -1,26 +1,14 @@
 import 'package:flutter/material.dart';
 
-import 'package:thechat2021/controllers/chat_controller.dart';
-
 class ComponentAppBar {
   final String titleAppBar;
+  final List<Widget> actions;
 
-  ComponentAppBar({@required this.titleAppBar});
+  ComponentAppBar({@required this.titleAppBar, this.actions});
 
   PreferredSizeWidget build() {
     return AppBar(
-      actions: <Widget>[
-        IconButton(
-          icon: Icon(
-            Icons.close,
-            size: 30.0,
-            color: Colors.red,
-          ),
-          onPressed: () {
-            ChatController().signOut();
-          },
-        ),
-      ],
+      actions: actions ?? null,
       elevation: 0.0,
       backgroundColor: Colors.transparent,
       title: Text(

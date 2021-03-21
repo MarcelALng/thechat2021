@@ -109,6 +109,10 @@ class RegisterScreen extends StatelessWidget {
                                         //faker.internet .email() fake email adresse random
                                         password: _password))
                                     .user;
+                            Navigator.pushNamedAndRemoveUntil(
+                                context,
+                                RoutesConstant.userHome,
+                                (Route<dynamic> route) => false);
                             print(
                                 _email + " créé"); // pour afficher le résultat
                           }
