@@ -41,61 +41,67 @@ class SigninScreen extends StatelessWidget {
                   SizedBox(
                     height: 48.0,
                   ),
-                  ComponentTextFormField(
-                    validator: (email) {
-                      if (!EmailValidator.validate(email)) {
-                        return "l'adresse email est invalide";
-                      }
-                      return null;
-                    },
-                    hintText: "Adresse Email",
-                    onSaved: (emailSaved) {
-                      _email = emailSaved;
-                    },
+                  Flexible(
+                    child: ComponentTextFormField(
+                      validator: (email) {
+                        if (!EmailValidator.validate(email)) {
+                          return "l'adresse email est invalide";
+                        }
+                        return null;
+                      },
+                      hintText: "Adresse Email",
+                      onSaved: (emailSaved) {
+                        _email = emailSaved;
+                      },
+                    ),
                   ),
                   SizedBox(
                     height: 12.0,
                   ),
-                  ComponentTextFormField(
-                    validator: (mdp) {
-                      if (mdp.length < 6) {
-                        return "Le mot de passe doit contenir au minimum 6 caracteres.";
-                      } else if (!mdp.contains("@")) {
-                        return "le mot de passe doit contenir un @.";
-                      }
-                      return null; // to check if connection ok or not;
-                    },
-                    hintText: "Mot de passe",
-                    onSaved: (passwordSaved) {
-                      _password = passwordSaved;
-                    },
+                  Flexible(
+                    child: ComponentTextFormField(
+                      validator: (mdp) {
+                        if (mdp.length < 6) {
+                          return "Le mot de passe doit contenir au minimum 6 caracteres.";
+                        } else if (!mdp.contains("@")) {
+                          return "le mot de passe doit contenir un @.";
+                        }
+                        return null; // to check if connection ok or not;
+                      },
+                      hintText: "Mot de passe",
+                      onSaved: (passwordSaved) {
+                        _password = passwordSaved;
+                      },
+                    ),
                   ),
                   SizedBox(
                     height: 24.0,
                   ),
-                  Hero(
-                    tag: "signinLogoTag",
-                    child: ComponentButton(
-                      buttonName: "Se connecter",
-                      onPressed: () async {
-                        if (_formKey.currentState.validate()) {
-                          _formKey.currentState.save();
-                        }
-                        try {
-                          final FirebaseUser user =
-                              (await _firebase.signInWithEmailAndPassword(
-                                      email: _email, password: _password))
-                                  .user;
-                          Navigator.pushNamedAndRemoveUntil(
-                              // avoid route to go out of screen
-                              context,
-                              RoutesConstant.userHome,
-                              (Route<dynamic> route) => false);
-                          print(user);
-                        } catch (error) {
-                          print(error);
-                        }
-                      },
+                  Flexible(
+                    child: Hero(
+                      tag: "signinLogoTag",
+                      child: ComponentButton(
+                        buttonName: "Se connecter",
+                        onPressed: () async {
+                          if (_formKey.currentState.validate()) {
+                            _formKey.currentState.save();
+                          }
+                          try {
+                            final FirebaseUser user =
+                                (await _firebase.signInWithEmailAndPassword(
+                                        email: _email, password: _password))
+                                    .user;
+                            Navigator.pushNamedAndRemoveUntil(
+                                // avoid route to go out of screen
+                                context,
+                                RoutesConstant.userHome,
+                                (Route<dynamic> route) => false);
+                            print(user);
+                          } catch (error) {
+                            print(error);
+                          }
+                        },
+                      ),
                     ),
                   ),
                 ],

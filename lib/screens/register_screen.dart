@@ -38,6 +38,7 @@ class RegisterScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: <Widget>[
                   Flexible(
+                    flex: 6,
                     child: Hero(
                       tag: "logoTag",
                       child: Image.asset(GlobalConstant.assetLogo),
@@ -46,50 +47,56 @@ class RegisterScreen extends StatelessWidget {
                   SizedBox(
                     height: 48.0,
                   ),
-                  ComponentTextFormField(
-                    validator: (email) {
-                      if (!EmailValidator.validate(email)) {
-                        return "Merci d'entre une adresse email correct.";
-                      }
-                      return null;
-                    },
-                    hintText: "Adresse Email",
-                    onSaved: (value) {
-                      _email = value;
-                    },
+                  Flexible(
+                    child: ComponentTextFormField(
+                      validator: (email) {
+                        if (!EmailValidator.validate(email)) {
+                          return "Merci d'entre une adresse email correct.";
+                        }
+                        return null;
+                      },
+                      hintText: "Adresse Email",
+                      onSaved: (value) {
+                        _email = value;
+                      },
+                    ),
                   ),
                   SizedBox(
                     height: 10.0,
                   ),
-                  ComponentTextFormField(
-                    controller: _passController,
-                    validator: (mdp) {
-                      if (mdp.length < 6) {
-                        return "Le mot de passe doit contenir au minimim 6 caractères";
-                      } else if (!mdp.contains("@")) {
-                        return "le mot de passe doit contenir un @";
-                      }
-                      return null;
-                    },
-                    hintText: "Mot de passe",
-                    onSaved: (value) {
-                      _password = value;
-                    },
+                  Flexible(
+                    child: ComponentTextFormField(
+                      controller: _passController,
+                      validator: (mdp) {
+                        if (mdp.length < 6) {
+                          return "Le mot de passe doit contenir au minimim 6 caractères";
+                        } else if (!mdp.contains("@")) {
+                          return "le mot de passe doit contenir un @";
+                        }
+                        return null;
+                      },
+                      hintText: "Mot de passe",
+                      onSaved: (value) {
+                        _password = value;
+                      },
+                    ),
                   ),
                   SizedBox(
                     height: 10.0,
                   ),
-                  ComponentTextFormField(
-                    validator: (confirmMdp) {
-                      if (confirmMdp.isEmpty) {
-                        return "Merci de confirmer votre mot de passe.";
-                      } else if (confirmMdp != _passController.text) {
-                        return "La confirmation du mot de passe n'est pas identique";
-                      }
-                      return null;
-                    },
-                    hintText: "Confirmer mot de passe",
-                    onSaved: (value) {},
+                  Flexible(
+                    child: ComponentTextFormField(
+                      validator: (confirmMdp) {
+                        if (confirmMdp.isEmpty) {
+                          return "Merci de confirmer votre mot de passe.";
+                        } else if (confirmMdp != _passController.text) {
+                          return "La confirmation du mot de passe n'est pas identique";
+                        }
+                        return null;
+                      },
+                      hintText: "Confirmer mot de passe",
+                      onSaved: (value) {},
+                    ),
                   ),
                   SizedBox(
                     height: 10.0,
