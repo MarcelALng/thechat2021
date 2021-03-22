@@ -28,33 +28,42 @@ class UserHomeScreen extends StatelessWidget {
           },
         ),
       ]).build(),
-      body: SafeArea(
-        child: FutureBuilder(
-          future: _controller.checkIdentity(context),
-          builder: (context, AsyncSnapshot<FirebaseUser> data) {
-            if (!data.hasData) {
-              return CircularProgressIndicator();
-            }
-            return FutureBuilder(
-              future: _controller.getDiscussions(),
-              builder: (context, AsyncSnapshot<QuerySnapshot> discussions) {
-                if (!discussions.hasData) {
-                  return CircularProgressIndicator();
-                }
-                return ListView.builder(
-                  itemCount: discussions.data.documents.length,
-                  itemBuilder: (context, item) {
-                    return Container(
-                      color: Colors.white,
-                      child: ListTile(
-                        title: Text(discussions.data.documents[item]["name"]),
-                      ),
-                    );
-                  },
-                );
-              },
-            );
-          },
+      body: Padding(
+        padding: const EdgeInsets.all(3.0),
+        child: SafeArea(
+          child: FutureBuilder(
+            future: _controller.checkIdentity(context),
+            builder: (context, AsyncSnapshot<FirebaseUser> data) {
+              if (!data.hasData) {
+                return CircularProgressIndicator();
+              }
+              return FutureBuilder(
+                future: _controller.getDiscussions(),
+                builder: (context, AsyncSnapshot<QuerySnapshot> discussions) {
+                  if (!discussions.hasData) {
+                    return CircularProgressIndicator();
+                  }
+                  return ListView.builder(
+                    itemCount: discussions.data.documents.length,
+                    itemBuilder: (context, item) {
+                      return Column(
+                        children: <Widget>[
+                          Container(
+                            color: Colors.white,
+                            child: ListTile(
+                              title: Text(
+                                  discussions.data.documents[item]["name"]),
+                            ),
+                          ),
+                          Divider(height: 1.0),
+                        ],
+                      );
+                    },
+                  );
+                },
+              );
+            },
+          ),
         ),
       ),
     );
