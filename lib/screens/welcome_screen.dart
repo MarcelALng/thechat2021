@@ -21,6 +21,9 @@ class WelcomeScreen extends StatelessWidget {
               Navigator.pushReplacementNamed(context, RoutesConstant.userHome),
         ),
         builder: (context, snapshot) {
+          if (snapshot.hasError) {
+            print(snapshot.error);
+          }
           if (!snapshot.hasData &&
               snapshot.connectionState == ConnectionState.waiting) {
             return CircularProgressIndicator();
