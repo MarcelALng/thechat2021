@@ -21,7 +21,7 @@ class _UserChatScreenState extends State<UserChatScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(GlobalConstant.colorBackground),
+      // backgroundColor: Color(GlobalConstant.colorBackground), no need cos theme data in main dart
       appBar: ComponentAppBar(titleAppBar: ": chat screen").build(),
       body: SafeArea(
         child: Container(

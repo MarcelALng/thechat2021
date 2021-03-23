@@ -31,7 +31,9 @@ class UserHomeScreen extends StatelessWidget {
         padding: const EdgeInsets.all(3.0),
         child: SafeArea(
           child: FutureBuilder(
-            future: _controller.checkIdentity(context),
+            future: _controller.checkIdentity(
+                onNoAuth: () => Navigator.pushNamedAndRemoveUntil(context,
+                    RoutesConstant.welcome, (Route<dynamic> route) => false)),
             builder: (context, AsyncSnapshot<FirebaseUser> data) {
               if (!data.hasData) {
                 return CircularProgressIndicator();

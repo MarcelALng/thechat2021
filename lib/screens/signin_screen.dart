@@ -23,7 +23,7 @@ class SigninScreen extends StatelessWidget {
         appBar: ComponentAppBar(
           titleAppBar: ": se connecter",
         ).build(),
-        backgroundColor: Color(GlobalConstant.colorBackground),
+        // backgroundColor: Color(GlobalConstant.colorBackground), no need cos theme data in main dart
         body: SafeArea(
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 12.0),

@@ -27,10 +27,10 @@ class ChatController {
         // Navigator.pushReplacementNamed(context, RoutesConstant.welcome);
       }
     } else {
-      if (onNoAuth != null) {
+      if (onAuth != null) {
         onAuth();
       }
-      //_activeUser = _user;
+      _activeUser = _user;
     }
     print(_activeUser);
     return _activeUser;
