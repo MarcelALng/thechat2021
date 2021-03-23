@@ -51,6 +51,8 @@ class UserHomeScreen extends StatelessWidget {
                           Container(
                             color: Colors.white,
                             child: ListTile(
+                              onTap: () => Navigator.pushNamed(
+                                  context, RoutesConstant.userchat),
                               title: Text(
                                   discussions.data.documents[item]["name"]),
                             ),
