@@ -14,13 +14,23 @@ class ChatController {
     return _cloudFirestore.collection("discussions").getDocuments();
   }
 
-  Future<FirebaseUser> checkIdentity(BuildContext context) async {
+  Future<FirebaseUser> checkIdentity({
+    void onAuth(),
+    void onNoAuth(),
+  }) async {
     final FirebaseUser _user = await _firebase.currentUser();
     if (_user == null) {
-      print(_user);
-      Navigator.pushReplacementNamed(context, RoutesConstant.welcome);
+      if (onNoAuth != null) {
+        // to check the function is NOT null
+        // if user not signed
+        onNoAuth();
+        // Navigator.pushReplacementNamed(context, RoutesConstant.welcome);
+      }
     } else {
-      _activeUser = _user;
+      if (onNoAuth != null) {
+        onAuth();
+      }
+      //_activeUser = _user;
     }
     print(_activeUser);
     return _activeUser;

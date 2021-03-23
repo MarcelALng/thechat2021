@@ -13,7 +13,6 @@ class UserHomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(GlobalConstant.colorBackground),
       appBar:
           ComponentAppBar(titleAppBar: ": espace membre ", actions: <Widget>[
         IconButton(
