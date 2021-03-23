@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:thechat2021/constants/global_constant.dart';
 
 import 'screens/welcome_screen.dart';
 import 'package:thechat2021/screens/signin_screen.dart';
@@ -24,6 +25,10 @@ class TheChatApp extends StatelessWidget {
         RoutesConstant.userHome: (context) => UserHomeScreen(),
         // RoutesConstant.changePassword: (context) => ChangePassword(),
       },
+      theme: ThemeData(
+        appBarTheme: AppBarTheme(color: Colors.transparent, elevation: 0.0),
+        scaffoldBackgroundColor: Color(GlobalConstant.colorBackground),
+      ),
     );
   }
 }

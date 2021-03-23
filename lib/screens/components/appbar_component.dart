@@ -9,8 +9,6 @@ class ComponentAppBar {
   PreferredSizeWidget build() {
     return AppBar(
       actions: actions ?? null,
-      elevation: 0.0,
-      backgroundColor: Colors.transparent,
       title: Text(
         "The Chaaat  $titleAppBar", // automatic title from AppBarComponent
         style: TextStyle(color: Colors.white),

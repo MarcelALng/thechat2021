@@ -13,7 +13,7 @@ class WelcomeScreen extends StatelessWidget {
       appBar: ComponentAppBar(
         titleAppBar: "",
       ).build(),
-      backgroundColor: Color(GlobalConstant.colorBackground),
+      //  backgroundColor: Color(GlobalConstant.colorBackground), no need cos theme data in main dart
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 12.0),
