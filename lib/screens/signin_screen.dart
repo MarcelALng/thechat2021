@@ -1,3 +1,6 @@
+// import 'dart:html';
+// import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -99,7 +102,8 @@ class SigninScreen extends StatelessWidget {
                                 (Route<dynamic> route) => false);
                             print(user);
                           } catch (error) {
-                            _errorHandler(errorCode: error.code);
+                            _errorHandler(
+                                errorCode: error.code, context: context);
                           }
                         },
                       ),
@@ -114,18 +118,39 @@ class SigninScreen extends StatelessWidget {
     );
   }
 
-  void _errorHandler({@required String errorCode}) {
-    String message = "";
+  void _errorHandler(
+      {@required String errorCode, @required BuildContext context}) {
+    String _message = "";
     switch (errorCode) {
       case "ERROR_WRONG_PASSWORD":
       case "ERROR_USER_NOT_FOUND":
-        message = "Les identifiants sont incorrects, merci de reessayer";
+        _message = "Les identifiants sont incorrects, merci de reessayer";
         break;
       default:
-        message =
+        _message =
             "Une erreur inattendue est survenue, merci de réessayer dans quelques minutes";
         break;
     }
+    showDialog(
+        context: context,
+        builder: (context) {
+          return SimpleDialog(
+            title: Text(
+              "Erreur!!!",
+              style: TextStyle(color: Colors.red),
+            ),
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(_message),
+              ),
+              FlatButton(
+                onPressed: () => Navigator.pop(context),
+                child: Text("Fermer"),
+              )
+            ],
+          );
+        });
   }
 }
 /*  void _errorMessage(ScaffoldState stS, String text) {
