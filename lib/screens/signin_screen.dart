@@ -20,11 +20,12 @@ class SigninScreen extends StatelessWidget {
     String _email;
     String _password;
     return Scaffold(
-        appBar: ComponentAppBar(
-          titleAppBar: ": se connecter",
-        ).build(),
-        // backgroundColor: Color(GlobalConstant.colorBackground), no need cos theme data in main dart
-        body: SafeArea(
+      appBar: ComponentAppBar(
+        titleAppBar: ": se connecter",
+      ).build(),
+      // backgroundColor: Color(GlobalConstant.colorBackground), no need cos theme data in main dart
+      body: Builder(
+        builder: (context) => SafeArea(
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 12.0),
             child: Form(
@@ -98,7 +99,7 @@ class SigninScreen extends StatelessWidget {
                                 (Route<dynamic> route) => false);
                             print(user);
                           } catch (error) {
-                            print(error);
+                            _errorHandler(errorCode: error.code);
                           }
                         },
                       ),
@@ -108,6 +109,28 @@ class SigninScreen extends StatelessWidget {
               ),
             ),
           ),
-        ));
+        ),
+      ),
+    );
+  }
+
+  void _errorHandler({@required String errorCode}) {
+    String message = "";
+    switch (errorCode) {
+      case "ERROR_WRONG_PASSWORD":
+      case "ERROR_USER_NOT_FOUND":
+        message = "Les identifiants sont incorrects, merci de reessayer";
+        break;
+      default:
+        message =
+            "Une erreur inattendue est survenue, merci de réessayer dans quelques minutes";
+        break;
+    }
   }
 }
+/*  void _errorMessage(ScaffoldState stS, String text) {
+    print(stS);
+    stS.showSnackBar(SnackBar(
+      content: Text(text),
+    ));
+  }*/

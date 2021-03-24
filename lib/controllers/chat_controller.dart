@@ -33,9 +33,9 @@ class ChatController {
       _activeUser = _user;
     }
     print(_activeUser);
-    if (_activeUser == null) {
-      return Future.error("L'utilisateur est null");
-    }
+    // if (_activeUser == null) {
+    //   return Future.error("L'utilisateur est null");
+    // }
     return _activeUser;
   }
 
