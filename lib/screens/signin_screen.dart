@@ -13,6 +13,7 @@ import 'package:thechat2021/screens/components/textformfield_component.dart';
 
 import 'components/appbar_component.dart';
 import 'components/textformfield_component.dart';
+import 'components/error_dialog_component.dart';
 
 class SigninScreen extends StatelessWidget {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
@@ -102,8 +103,11 @@ class SigninScreen extends StatelessWidget {
                                 (Route<dynamic> route) => false);
                             print(user);
                           } catch (error) {
-                            _errorHandler(
-                                errorCode: error.code, context: context);
+                            showDialog(
+                              context: context,
+                              builder: (context) =>
+                                  ComponentErrorDialog(error.code),
+                            );
                           }
                         },
                       ),
@@ -116,41 +120,6 @@ class SigninScreen extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  void _errorHandler(
-      {@required String errorCode, @required BuildContext context}) {
-    String _message = "";
-    switch (errorCode) {
-      case "ERROR_WRONG_PASSWORD":
-      case "ERROR_USER_NOT_FOUND":
-        _message = "Les identifiants sont incorrects, merci de reessayer";
-        break;
-      default:
-        _message =
-            "Une erreur inattendue est survenue, merci de réessayer dans quelques minutes";
-        break;
-    }
-    showDialog(
-        context: context,
-        builder: (context) {
-          return SimpleDialog(
-            title: Text(
-              "Erreur!!!",
-              style: TextStyle(color: Colors.red),
-            ),
-            children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(_message),
-              ),
-              FlatButton(
-                onPressed: () => Navigator.pop(context),
-                child: Text("Fermer"),
-              )
-            ],
-          );
-        });
   }
 }
 /*  void _errorMessage(ScaffoldState stS, String text) {
