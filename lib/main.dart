@@ -8,6 +8,7 @@ import 'screens/user_home_screen.dart';
 import 'screens/user_chat_screen.dart';
 
 import 'constants/routes_constant.dart';
+import 'constants/global_constant.dart';
 
 void main() => runApp(TheChatApp());
 
@@ -22,7 +23,7 @@ class TheChatApp extends StatelessWidget {
           case RoutesConstant.userChat:
             return MaterialPageRoute(
                 builder: (context) =>
-                    UserChatScreen(discussionID: route.arguments));
+                    UserChatScreen(discussionId: route.arguments));
             break;
           default:
             return MaterialPageRoute(builder: (context) => UserHomeScreen());

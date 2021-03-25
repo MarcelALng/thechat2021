@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'package:thechat2021/constants/routes_constant.dart';
+import 'package:thechat2021/constants/global_constant.dart';
 
 class ChatController {
   final FirebaseAuth _firebase = FirebaseAuth.instance;
@@ -14,10 +15,10 @@ class ChatController {
     return _cloudFirestore.collection("discussions").getDocuments();
   }
 
-  Stream<QuerySnapshot> getChat(String discussionID) {
+  Stream<QuerySnapshot> getChat(String discussionId) {
     return _cloudFirestore
         .collection("discussions")
-        .document(discussionID)
+        .document(discussionId)
         .collection("chat")
         .snapshots();
   }

@@ -11,25 +11,22 @@ import 'package:thechat2021/constants/global_constant.dart';
 import 'package:thechat2021/constants/routes_constant.dart';
 
 class UserChatScreen extends StatefulWidget {
-  final String discussionID;
+  final String discussionId;
 
-  UserChatScreen(this.discussionID);
+  UserChatScreen({@required this.discussionId});
   @override
   _UserChatScreenState createState() => _UserChatScreenState();
 }
 
 class _UserChatScreenState extends State<UserChatScreen> {
-  // final _controller = ChatController();
-
   @override
   Widget build(BuildContext context) {
-    print(widget.discussionID);
+    print(widget.discussionId);
     return Scaffold(
-      // backgroundColor: Color(GlobalConstant.colorBackground), no need cos theme data in main dart
       appBar: ComponentAppBar(titleAppBar: ": chat screen").build(),
       body: SafeArea(
         child: StreamBuilder<QuerySnapshot>(
-            stream: ChatController().getChat(widget.discussionID),
+            stream: ChatController().getChat(widget.discussionId),
             builder: (context, snapshot) {
               if (!snapshot.hasData) {
                 return Container(
