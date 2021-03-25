@@ -33,13 +33,49 @@ class _UserChatScreenState extends State<UserChatScreen> {
                   child: Text(" Pas de données pour cette discussion."),
                 );
               }
-              return ListView.builder(
-                  itemCount: snapshot.data.documents.length,
-                  itemBuilder: (context, item) {
-                    return Container(
-                      child: Text(snapshot.data.documents[item]["content"]),
-                    );
-                  });
+              return Column(
+                children: <Widget>[
+                  Expanded(
+                    child: ListView.builder(
+                        itemCount: snapshot.data.documents.length,
+                        itemBuilder: (context, item) {
+                          return Column(
+                            children: [
+                              Container(
+                                color: Colors.white,
+                                margin: EdgeInsets.all(8),
+                                padding: EdgeInsets.all(8),
+                                child: Text(
+                                    snapshot.data.documents[item]["content"]),
+                              ),
+                            ],
+                          );
+                        }),
+                  ),
+                  Container(
+                    child: Row(
+                      children: <Widget>[
+                        Expanded(
+                          child: TextFormField(
+                            decoration: InputDecoration(
+                              filled: true,
+                              hintText: "Veuillez écrire votre message",
+                              fillColor: Colors.white,
+                            ),
+                          ),
+                        ),
+                        FlatButton(
+                          child: Text(
+                            "Envoyer",
+                            style: TextStyle(color: Colors.white),
+                          ),
+                          onPressed: () {},
+                        )
+                      ],
+                    ),
+                  )
+                ],
+              );
             }),
       ),
     );
