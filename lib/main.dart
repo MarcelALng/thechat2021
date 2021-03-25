@@ -17,11 +17,22 @@ class TheChatApp extends StatelessWidget {
     return MaterialApp(
       title: "The Chat 2021",
       initialRoute: RoutesConstant.welcome,
+      onGenerateRoute: (route) {
+        switch (route.name) {
+          case RoutesConstant.userChat:
+            return MaterialPageRoute(
+                builder: (context) =>
+                    UserChatScreen(discussionID: route.arguments));
+            break;
+          default:
+            return MaterialPageRoute(builder: (context) => UserHomeScreen());
+            break;
+        }
+      },
       routes: {
         RoutesConstant.welcome: (context) => WelcomeScreen(),
         RoutesConstant.register: (context) => RegisterScreen(),
         RoutesConstant.signin: (context) => SigninScreen(),
-        RoutesConstant.userchat: (context) => UserChatScreen(),
         RoutesConstant.userHome: (context) => UserHomeScreen(),
         // RoutesConstant.changePassword: (context) => ChangePassword(),
       },

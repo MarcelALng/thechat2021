@@ -14,6 +14,14 @@ class ChatController {
     return _cloudFirestore.collection("discussions").getDocuments();
   }
 
+  Stream<QuerySnapshot> getChat(String discussionID) {
+    return _cloudFirestore
+        .collection("discussions")
+        .document(discussionID)
+        .collection("chat")
+        .snapshots();
+  }
+
   Future<FirebaseUser> checkIdentity({
     void onAuth(),
     void onNoAuth(),

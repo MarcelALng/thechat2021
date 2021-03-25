@@ -38,7 +38,7 @@ class RegisterScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: <Widget>[
                   Flexible(
-                    flex: 6,
+                    flex: 3,
                     child: Hero(
                       tag: "logoTag",
                       child: Image.asset(GlobalConstant.assetLogo),
