@@ -23,6 +23,15 @@ class ChatController {
         .snapshots();
   }
 
+  sendPostChat({@required String postChat, @required String discussionId}) {
+    Map<String, dynamic> _postData = {'content': postChat};
+    _cloudFirestore
+        .collection("discussions")
+        .document(discussionId)
+        .collection("chat")
+        .add(_postData);
+  }
+
   Future<FirebaseUser> checkIdentity({
     void onAuth(),
     void onNoAuth(),

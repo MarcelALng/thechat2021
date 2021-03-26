@@ -19,14 +19,18 @@ class UserChatScreen extends StatefulWidget {
 }
 
 class _UserChatScreenState extends State<UserChatScreen> {
+  final GlobalKey<FormState> _keyForm = GlobalKey<FormState>();
+  final ChatController _controller = ChatController();
+
   @override
   Widget build(BuildContext context) {
+    String _message;
     print(widget.discussionId);
     return Scaffold(
       appBar: ComponentAppBar(titleAppBar: ": chat screen").build(),
       body: SafeArea(
         child: StreamBuilder<QuerySnapshot>(
-            stream: ChatController().getChat(widget.discussionId),
+            stream: _controller.getChat(widget.discussionId),
             builder: (context, snapshot) {
               if (!snapshot.hasData) {
                 return Container(
@@ -52,26 +56,46 @@ class _UserChatScreenState extends State<UserChatScreen> {
                           );
                         }),
                   ),
-                  Container(
-                    child: Row(
-                      children: <Widget>[
-                        Expanded(
-                          child: TextFormField(
-                            decoration: InputDecoration(
-                              filled: true,
-                              hintText: "Veuillez écrire votre message",
-                              fillColor: Colors.white,
+                  Form(
+                    key: _keyForm,
+                    child: Container(
+                      padding: EdgeInsets.symmetric(horizontal: 8.0),
+                      child: Row(
+                        children: <Widget>[
+                          Expanded(
+                            child: TextFormField(
+                              onSaved: (value) {
+                                _message = value;
+                              },
+                              validator: (value) {
+                                if (value.isEmpty) {
+                                  return "le champs est vide";
+                                }
+                                return null;
+                              },
+                              decoration: InputDecoration(
+                                filled: true,
+                                hintText: "Veuillez écrire votre message",
+                                fillColor: Colors.white,
+                              ),
                             ),
                           ),
-                        ),
-                        FlatButton(
-                          child: Text(
-                            "Envoyer",
-                            style: TextStyle(color: Colors.white),
-                          ),
-                          onPressed: () {},
-                        )
-                      ],
+                          FlatButton(
+                            child: Text(
+                              "Envoyer",
+                              style: TextStyle(color: Colors.white),
+                            ),
+                            onPressed: () {
+                              if (_keyForm.currentState.validate()) {
+                                _keyForm.currentState.save();
+                                _controller.sendPostChat(
+                                    postChat: _message,
+                                    discussionId: widget.discussionId);
+                              }
+                            },
+                          )
+                        ],
+                      ),
                     ),
                   )
                 ],
