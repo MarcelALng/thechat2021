@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 // import 'package:firebase/firebase.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:date_format/date_format.dart';
 
 import 'components/appbar_component.dart';
 
@@ -43,8 +44,27 @@ class _UserChatScreenState extends State<UserChatScreen> {
                     child: ListView.builder(
                         itemCount: snapshot.data.documents.length,
                         itemBuilder: (context, item) {
+                          final DateTime _dateString = DateTime.tryParse(
+                              snapshot.data.documents[item]["date"]);
+                          final String _dateFormated = _dateString != null
+                              ? formatDate(_dateString, [
+                                  dd,
+                                  '-',
+                                  mm,
+                                  '-',
+                                  yy,
+                                  ' ',
+                                  HH,
+                                  ':',
+                                  mm,
+                                  ':',
+                                  ss
+                                ])
+                              : "Erreur";
                           return Column(
-                            children: [
+                            children: <Widget>[
+                              Text(_dateFormated),
+                              // Text(snapshot.data.documents[item]["date"]),
                               Container(
                                 color: Colors.white,
                                 margin: EdgeInsets.all(8),
@@ -75,7 +95,7 @@ class _UserChatScreenState extends State<UserChatScreen> {
                               },
                               decoration: InputDecoration(
                                 filled: true,
-                                hintText: "Veuillez écrire votre message",
+                                hintText: "Veuillez écrire votre message:",
                                 fillColor: Colors.white,
                               ),
                             ),

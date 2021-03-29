@@ -18,11 +18,17 @@
 			"type": "dart",
 			"deviceId": "BDA3B766-A6D5-444D-9F05-7C90A4D17D74"
 		},
+		{
+			"name": "iPhone5S",
+			"request": "launch",
+			"type": "dart",
+			"deviceId": "adba47588129278bb1f3d914d8029f5819315105"
+		},
 	],
 	"compounds": [
 		{
 			"name": "All Devices",
-			"configurations": ["Android", "iPhone"],
-		}
+			"configurations": ["Android", "iPhone","iPhone5S"]
+		},
 	]
 }
