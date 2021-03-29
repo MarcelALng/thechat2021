@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-// import 'package:firebase/firebase.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:date_format/date_format.dart';
 
@@ -30,98 +30,125 @@ class _UserChatScreenState extends State<UserChatScreen> {
     return Scaffold(
       appBar: ComponentAppBar(titleAppBar: ": chat screen").build(),
       body: SafeArea(
-        child: StreamBuilder<QuerySnapshot>(
-            stream: _controller.getChat(widget.discussionId),
-            builder: (context, snapshot) {
-              if (!snapshot.hasData) {
-                return Container(
-                  child: Text(" Pas de données pour cette discussion."),
-                );
-              }
-              return Column(
-                children: <Widget>[
-                  Expanded(
-                    child: ListView.builder(
-                        itemCount: snapshot.data.documents.length,
-                        itemBuilder: (context, item) {
-                          final DateTime _dateString = DateTime.tryParse(
-                              snapshot.data.documents[item]["date"]);
-                          final String _dateFormated = _dateString != null
-                              ? formatDate(_dateString, [
-                                  dd,
-                                  '-',
-                                  mm,
-                                  '-',
-                                  yy,
-                                  ' ',
-                                  HH,
-                                  ':',
-                                  mm,
-                                  ':',
-                                  ss
-                                ])
-                              : "Erreur";
-                          return Column(
-                            children: <Widget>[
-                              Text(_dateFormated),
-                              // Text(snapshot.data.documents[item]["date"]),
-                              Container(
-                                color: Colors.white,
-                                margin: EdgeInsets.all(8),
-                                padding: EdgeInsets.all(8),
-                                child: Text(
-                                    snapshot.data.documents[item]["content"]),
-                              ),
-                            ],
-                          );
-                        }),
-                  ),
-                  Form(
-                    key: _keyForm,
-                    child: Container(
-                      padding: EdgeInsets.symmetric(horizontal: 8.0),
-                      child: Row(
-                        children: <Widget>[
-                          Expanded(
-                            child: TextFormField(
-                              onSaved: (value) {
-                                _message = value;
-                              },
-                              validator: (value) {
-                                if (value.isEmpty) {
-                                  return "le champs est vide";
-                                }
-                                return null;
-                              },
-                              decoration: InputDecoration(
-                                filled: true,
-                                hintText: "Veuillez écrire votre message:",
-                                fillColor: Colors.white,
-                              ),
-                            ),
-                          ),
-                          FlatButton(
-                            child: Text(
-                              "Envoyer",
-                              style: TextStyle(color: Colors.white),
-                            ),
-                            onPressed: () {
-                              if (_keyForm.currentState.validate()) {
-                                _keyForm.currentState.save();
-                                print(_message); //test pour verifier
-                                _controller.sendPostChat(
-                                    postChat: _message,
-                                    discussionId: widget.discussionId);
-                              }
-                            },
-                          )
-                        ],
+        child: FutureBuilder(
+          future: _controller.checkIdentity(
+              onNoAuth: () => Navigator.pushNamedAndRemoveUntil(context,
+                  RoutesConstant.welcome, (Route<dynamic> route) => false)),
+          builder: (context, AsyncSnapshot<FirebaseUser> data) {
+            if (!data.hasData) {
+              return CircularProgressIndicator();
+            }
+            return StreamBuilder<QuerySnapshot>(
+                stream: _controller.getChat(widget.discussionId),
+                builder: (context, snapshot) {
+                  if (!snapshot.hasData) {
+                    return Container(
+                      child: Text(" Pas de données pour cette discussion."),
+                    );
+                  }
+                  return Column(
+                    children: <Widget>[
+                      Expanded(
+                        child: ListView.builder(
+                            itemCount: snapshot.data.documents.length,
+                            itemBuilder: (context, item) {
+                              final DateTime _dateString = DateTime.tryParse(
+                                  snapshot.data.documents[item]["date"]);
+                              final String _dateFormated = _dateString != null
+                                  ? formatDate(_dateString, [
+                                      dd,
+                                      '-',
+                                      mm,
+                                      '-',
+                                      yy,
+                                      ' ',
+                                      HH,
+                                      ':',
+                                      mm,
+                                      ':',
+                                      ss
+                                    ])
+                                  : "Erreur";
+                              return Column(
+                                crossAxisAlignment: CrossAxisAlignment.end,
+                                children: <Widget>[
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    children: <Widget>[
+                                      Text(
+                                        snapshot.data.documents[item]["sender"],
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                      SizedBox(
+                                        width: 5.0,
+                                      ),
+                                      Text(
+                                        _dateFormated,
+                                        style: TextStyle(fontSize: 12.0),
+                                      ),
+                                    ],
+                                  ),
+                                  Container(
+                                    color: Colors.white,
+                                    margin: EdgeInsets.all(8),
+                                    padding: EdgeInsets.all(8),
+                                    child: Text(snapshot.data.documents[item]
+                                        ["content"]),
+                                  ),
+                                ],
+                              );
+                            }),
                       ),
-                    ),
-                  )
-                ],
-              );
-            }),
+                      Form(
+                        key: _keyForm,
+                        child: Container(
+                          padding: EdgeInsets.symmetric(horizontal: 8.0),
+                          child: Row(
+                            children: <Widget>[
+                              Expanded(
+                                child: TextFormField(
+                                  onSaved: (value) {
+                                    _message = value;
+                                  },
+                                  validator: (value) {
+                                    if (value.isEmpty) {
+                                      return "le champs est vide";
+                                    }
+                                    return null;
+                                  },
+                                  decoration: InputDecoration(
+                                    filled: true,
+                                    hintText: "Veuillez écrire votre message:",
+                                    fillColor: Colors.white,
+                                  ),
+                                ),
+                              ),
+                              FlatButton(
+                                child: Text(
+                                  "Envoyer",
+                                  style: TextStyle(color: Colors.white),
+                                ),
+                                onPressed: () {
+                                  if (_keyForm.currentState.validate()) {
+                                    _keyForm.currentState.save();
+                                    print(_message); //test pour verifier
+                                    _controller.sendPostChat(
+                                        postChat: _message,
+                                        discussionId: widget.discussionId);
+                                  }
+                                },
+                              )
+                            ],
+                          ),
+                        ),
+                      )
+                    ],
+                  );
+                });
+          },
+        ),
       ),
     );
   }

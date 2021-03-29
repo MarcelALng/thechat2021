@@ -26,7 +26,7 @@ class ChatController {
 
   sendPostChat({@required String postChat, @required String discussionId}) {
     Map<String, dynamic> _postData = {
-      'sender': "test",
+      'sender': _activeUser.email,
       'content': postChat,
       'date': DateTime.now().toIso8601String()
     };
