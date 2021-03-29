@@ -20,11 +20,16 @@ class ChatController {
         .collection("discussions")
         .document(discussionId)
         .collection("chat")
+        .orderBy("date", descending: true)
         .snapshots();
   }
 
   sendPostChat({@required String postChat, @required String discussionId}) {
-    Map<String, dynamic> _postData = {'content': postChat};
+    Map<String, dynamic> _postData = {
+      'sender': "test",
+      'content': postChat,
+      'date': DateTime.now().toIso8601String()
+    };
 
     try {
       _cloudFirestore

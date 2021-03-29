@@ -88,6 +88,7 @@ class _UserChatScreenState extends State<UserChatScreen> {
                             onPressed: () {
                               if (_keyForm.currentState.validate()) {
                                 _keyForm.currentState.save();
+                                print(_message); //test pour verifier
                                 _controller.sendPostChat(
                                     postChat: _message,
                                     discussionId: widget.discussionId);
