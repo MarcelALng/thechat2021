@@ -69,35 +69,45 @@ class _UserChatScreenState extends State<UserChatScreen> {
                                       ss
                                     ])
                                   : "Erreur";
-                              return Column(
-                                crossAxisAlignment: CrossAxisAlignment.end,
-                                children: <Widget>[
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.end,
-                                    children: <Widget>[
-                                      Text(
-                                        snapshot.data.documents[item]["sender"],
-                                        style: TextStyle(
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                      SizedBox(
-                                        width: 5.0,
-                                      ),
-                                      Text(
-                                        _dateFormated,
-                                        style: TextStyle(fontSize: 12.0),
-                                      ),
-                                    ],
-                                  ),
-                                  Container(
-                                    color: Colors.white,
-                                    margin: EdgeInsets.all(8),
-                                    padding: EdgeInsets.all(8),
-                                    child: Text(snapshot.data.documents[item]
-                                        ["content"]),
-                                  ),
-                                ],
+                              final String _displayName = snapshot
+                                  .data.documents[item]["sender"]
+                                  .toString()
+                                  .split("@")[0]
+                                  .toUpperCase();
+                              return Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.end,
+                                  children: <Widget>[
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.end,
+                                      children: <Widget>[
+                                        Text(
+                                          _displayName,
+                                          // .toString()
+                                          // .split("@"),
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                        SizedBox(
+                                          width: 5.0,
+                                        ),
+                                        Text(
+                                          _dateFormated,
+                                          style: TextStyle(fontSize: 12.0),
+                                        ),
+                                      ],
+                                    ),
+                                    Container(
+                                      color: Colors.white,
+                                      margin: EdgeInsets.all(8),
+                                      padding: EdgeInsets.all(8),
+                                      child: Text(snapshot.data.documents[item]
+                                          ["content"]),
+                                    ),
+                                  ],
+                                ),
                               );
                             }),
                       ),
@@ -133,6 +143,8 @@ class _UserChatScreenState extends State<UserChatScreen> {
                                 onPressed: () {
                                   if (_keyForm.currentState.validate()) {
                                     _keyForm.currentState.save();
+                                    _keyForm.currentState
+                                        .reset(); // efface le message du champs decriture
                                     print(_message); //test pour verifier
                                     _controller.sendPostChat(
                                         postChat: _message,
