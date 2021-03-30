@@ -24,6 +24,11 @@ class ChatController extends ChangeNotifier {
         .snapshots();
   }
 
+  sendNewDiscussion(String discussionName) {
+    _cloudFirestore.collection("discussions").add({"name": discussionName});
+    notifyListeners();
+  }
+
   sendPostChat({@required String postChat, @required String discussionId}) {
     Map<String, dynamic> _postData = {
       'sender': activeUser.email,
