@@ -9,7 +9,7 @@ import 'package:thechat2021/constants/global_constant.dart';
 class ChatController {
   final FirebaseAuth _firebase = FirebaseAuth.instance;
   final Firestore _cloudFirestore = Firestore.instance;
-  FirebaseUser _activeUser;
+  FirebaseUser activeUser;
 
   Future<QuerySnapshot> getDiscussions() {
     return _cloudFirestore.collection("discussions").getDocuments();
@@ -26,7 +26,7 @@ class ChatController {
 
   sendPostChat({@required String postChat, @required String discussionId}) {
     Map<String, dynamic> _postData = {
-      'sender': _activeUser.email,
+      'sender': activeUser.email,
       'content': postChat,
       'date': DateTime.now().toIso8601String()
     };
@@ -58,13 +58,13 @@ class ChatController {
       if (onAuth != null) {
         onAuth();
       }
-      _activeUser = _user;
+      activeUser = _user;
     }
-    print(_activeUser);
+    print(activeUser);
     // if (_activeUser == null) {
     //   return Future.error("L'utilisateur est null");
     // }
-    return _activeUser;
+    return activeUser;
   }
 
   void signOut() {

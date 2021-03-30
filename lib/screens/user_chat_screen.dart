@@ -74,6 +74,11 @@ class _UserChatScreenState extends State<UserChatScreen> {
                                   .toString()
                                   .split("@")[0]
                                   .toUpperCase();
+                              bool isMe = snapshot.data.documents[item]
+                                          ["sender"] ==
+                                      _controller.activeUser.email
+                                  ? true
+                                  : false;
                               return Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: Column(
@@ -84,8 +89,6 @@ class _UserChatScreenState extends State<UserChatScreen> {
                                       children: <Widget>[
                                         Text(
                                           _displayName,
-                                          // .toString()
-                                          // .split("@"),
                                           style: TextStyle(
                                               color: Colors.white,
                                               fontWeight: FontWeight.bold),
@@ -100,7 +103,9 @@ class _UserChatScreenState extends State<UserChatScreen> {
                                       ],
                                     ),
                                     Container(
-                                      color: Colors.white,
+                                      color: isMe
+                                          ? Colors.lightBlueAccent
+                                          : Colors.grey,
                                       margin: EdgeInsets.all(8),
                                       padding: EdgeInsets.all(8),
                                       child: Text(snapshot.data.documents[item]
