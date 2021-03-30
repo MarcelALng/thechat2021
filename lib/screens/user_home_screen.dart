@@ -6,6 +6,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 import 'components/appbar_component.dart';
+import 'components/floating_action_component.dart';
 import 'package:thechat2021/controllers/chat_controller.dart';
 
 import 'package:thechat2021/constants/global_constant.dart';
@@ -15,57 +16,9 @@ class UserHomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ChatController _controller = Provider.of<ChatController>(context);
-    final GlobalKey<FormState> _keyForm = GlobalKey<FormState>();
-    String _discussionName;
 
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          showModalBottomSheet(
-              context: context,
-              builder: (context) {
-                return SafeArea(
-                    child: Form(
-                  key: _keyForm,
-                  child: Row(
-                    children: <Widget>[
-                      Expanded(
-                        child: TextFormField(
-                          onSaved: (value) {
-                            _discussionName = value;
-                          },
-                          validator: (value) {
-                            if (value.isEmpty) {
-                              return "Le champs est vide";
-                            }
-                            return null;
-                          },
-                          decoration: InputDecoration(
-                            hintText: "Ajouter une discussion",
-                          ),
-                        ),
-                      ),
-                      FlatButton(
-                        child: Text(
-                          "Ajouter",
-                          style: TextStyle(color: Colors.blue),
-                        ),
-                        onPressed: () async {
-                          if (_keyForm.currentState.validate()) {
-                            _keyForm.currentState.save();
-                            await _controller
-                                .sendNewDiscussion(_discussionName);
-                            Navigator.pop(context);
-                          }
-                        },
-                      ),
-                    ],
-                  ),
-                ));
-              });
-        },
-        child: Icon(Icons.add),
-      ),
+      floatingActionButton: ComponentFloatingAction(),
       appBar:
           ComponentAppBar(titleAppBar: ": espace membre ", actions: <Widget>[
         IconButton(
