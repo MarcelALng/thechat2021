@@ -1,4 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
+
+import 'package:provider/provider.dart';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
@@ -9,9 +12,9 @@ import 'package:thechat2021/constants/global_constant.dart';
 import 'package:thechat2021/constants/routes_constant.dart';
 
 class UserHomeScreen extends StatelessWidget {
-  final _controller = ChatController();
   @override
   Widget build(BuildContext context) {
+    final _controller = Provider.of<ChatController>(context);
     return Scaffold(
       appBar:
           ComponentAppBar(titleAppBar: ": espace membre ", actions: <Widget>[

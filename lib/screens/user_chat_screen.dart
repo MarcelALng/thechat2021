@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:provider/provider.dart';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:date_format/date_format.dart';
@@ -8,7 +10,7 @@ import 'components/appbar_component.dart';
 
 import 'package:thechat2021/controllers/chat_controller.dart';
 
-import 'package:thechat2021/constants/global_constant.dart';
+// import 'package:thechat2021/constants/global_constant.dart';
 import 'package:thechat2021/constants/routes_constant.dart';
 
 class UserChatScreen extends StatefulWidget {
@@ -21,10 +23,10 @@ class UserChatScreen extends StatefulWidget {
 
 class _UserChatScreenState extends State<UserChatScreen> {
   final GlobalKey<FormState> _keyForm = GlobalKey<FormState>();
-  final ChatController _controller = ChatController();
 
   @override
   Widget build(BuildContext context) {
+    final ChatController _controller = Provider.of<ChatController>(context);
     String _message;
     print(widget.discussionId);
     return Scaffold(

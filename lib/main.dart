@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+
+import 'package:provider/provider.dart';
+
 import 'package:thechat2021/constants/global_constant.dart';
+import 'package:thechat2021/controllers/chat_controller.dart';
 
 import 'screens/welcome_screen.dart';
 import 'package:thechat2021/screens/signin_screen.dart';
@@ -15,31 +19,34 @@ void main() => runApp(TheChatApp());
 class TheChatApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: "The Chat 2021",
-      initialRoute: RoutesConstant.welcome,
-      onGenerateRoute: (route) {
-        switch (route.name) {
-          case RoutesConstant.userChat:
-            return MaterialPageRoute(
-                builder: (context) =>
-                    UserChatScreen(discussionId: route.arguments));
-            break;
-          default:
-            return MaterialPageRoute(builder: (context) => UserHomeScreen());
-            break;
-        }
-      },
-      routes: {
-        RoutesConstant.welcome: (context) => WelcomeScreen(),
-        RoutesConstant.register: (context) => RegisterScreen(),
-        RoutesConstant.signin: (context) => SigninScreen(),
-        RoutesConstant.userHome: (context) => UserHomeScreen(),
-        // RoutesConstant.changePassword: (context) => ChangePassword(),
-      },
-      theme: ThemeData(
-        appBarTheme: AppBarTheme(color: Colors.transparent, elevation: 0.0),
-        scaffoldBackgroundColor: Color(GlobalConstant.colorBackground),
+    return ChangeNotifierProvider<ChatController>(
+      create: (context) => ChatController(),
+      child: MaterialApp(
+        title: "The Chat 2021",
+        initialRoute: RoutesConstant.welcome,
+        onGenerateRoute: (route) {
+          switch (route.name) {
+            case RoutesConstant.userChat:
+              return MaterialPageRoute(
+                  builder: (context) =>
+                      UserChatScreen(discussionId: route.arguments));
+              break;
+            default:
+              return MaterialPageRoute(builder: (context) => UserHomeScreen());
+              break;
+          }
+        },
+        routes: {
+          RoutesConstant.welcome: (context) => WelcomeScreen(),
+          RoutesConstant.register: (context) => RegisterScreen(),
+          RoutesConstant.signin: (context) => SigninScreen(),
+          RoutesConstant.userHome: (context) => UserHomeScreen(),
+          // RoutesConstant.changePassword: (context) => ChangePassword(),
+        },
+        theme: ThemeData(
+          appBarTheme: AppBarTheme(color: Colors.transparent, elevation: 0.0),
+          scaffoldBackgroundColor: Color(GlobalConstant.colorBackground),
+        ),
       ),
     );
   }

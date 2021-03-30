@@ -20,7 +20,8 @@ dependencies:
   cloud_firestore: 
   email_validator: ^1.0.0
   date_format:
-
+  provider:
+      
 dev_dependencies:
   flutter_test:
     sdk: flutter

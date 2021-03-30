@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:provider/provider.dart';
+
 import 'package:thechat2021/constants/routes_constant.dart';
 import 'package:thechat2021/constants/global_constant.dart';
 
@@ -16,7 +18,7 @@ class WelcomeScreen extends StatelessWidget {
         titleAppBar: "",
       ).build(),
       body: FutureBuilder(
-        future: ChatController().checkIdentity(
+        future: Provider.of<ChatController>(context).checkIdentity(
           onAuth: () =>
               Navigator.pushReplacementNamed(context, RoutesConstant.userHome),
         ),
