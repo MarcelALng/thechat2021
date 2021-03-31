@@ -51,41 +51,46 @@ class UserHomeScreen extends StatelessWidget {
                   if (!discussions.hasData) {
                     return CircularProgressIndicator();
                   }
-                  return ListView.builder(
-                    itemCount: discussions.data.documents.length,
-                    itemBuilder: (context, item) {
-                      return Column(
-                        children: <Widget>[
-                          Container(
-                            color: Colors.white,
-                            child: ListTile(
-                              onLongPress: () {
-                                bool _isCreator = discussions.data
-                                            .documents[item]["creatorID"] ==
-                                        _controller.activeUser.uid
-                                    ? true
-                                    : false;
-                                if (_isCreator) {
-                                  showDialog(
-                                      context: context,
-                                      builder: (context) {
-                                        return ComponentAlertDialog(discussions
-                                            .data.documents[item].documentID);
-                                      });
-                                }
-                              },
-                              onTap: () => Navigator.pushNamed(
-                                  context, RoutesConstant.userChat,
-                                  arguments: discussions
-                                      .data.documents[item].documentID),
-                              title: Text(
-                                  discussions.data.documents[item]["name"]),
+                  return RefreshIndicator(
+                    onRefresh: () => _controller.refreshDiscussions(),
+                    child: ListView.builder(
+                      shrinkWrap: true,
+                      itemCount: discussions.data.documents.length,
+                      itemBuilder: (context, item) {
+                        return Column(
+                          children: <Widget>[
+                            Container(
+                              color: Colors.white,
+                              child: ListTile(
+                                onLongPress: () {
+                                  bool _isCreator = discussions.data
+                                              .documents[item]["creatorID"] ==
+                                          _controller.activeUser.uid
+                                      ? true
+                                      : false;
+                                  if (_isCreator) {
+                                    showDialog(
+                                        context: context,
+                                        builder: (context) {
+                                          return ComponentAlertDialog(
+                                              discussions.data.documents[item]
+                                                  .documentID);
+                                        });
+                                  }
+                                },
+                                onTap: () => Navigator.pushNamed(
+                                    context, RoutesConstant.userChat,
+                                    arguments: discussions
+                                        .data.documents[item].documentID),
+                                title: Text(
+                                    discussions.data.documents[item]["name"]),
+                              ),
                             ),
-                          ),
-                          Divider(height: 1.0),
-                        ],
-                      );
-                    },
+                            Divider(height: 1.0),
+                          ],
+                        );
+                      },
+                    ),
                   );
                 },
               );

@@ -65,6 +65,12 @@ class ChatController extends ChangeNotifier {
     });
   }
 
+  Future<void> refreshDiscussions() async {
+    notifyListeners();
+    await Future<void>.delayed(Duration(seconds: 2));
+    return null;
+  }
+
   Future<FirebaseUser> checkIdentity({
     void onAuth(),
     void onNoAuth(),
