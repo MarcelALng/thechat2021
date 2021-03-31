@@ -9,6 +9,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class ChatController extends ChangeNotifier {
   final FirebaseAuth _firebase = FirebaseAuth.instance;
   final Firestore _cloudFirestore = Firestore.instance;
+
+  static const String _discussionCollection = "discussions";
+  static const String _discussionChat = "chat";
+
   FirebaseUser activeUser;
 
   Future<QuerySnapshot> getDiscussions() {
@@ -17,15 +21,20 @@ class ChatController extends ChangeNotifier {
 
   Stream<QuerySnapshot> getChat(String discussionId) {
     return _cloudFirestore
-        .collection("discussions")
+        .collection(_discussionCollection)
         .document(discussionId)
-        .collection("chat")
+        .collection(_discussionChat)
         .orderBy("date", descending: true)
         .snapshots();
   }
 
   sendNewDiscussion(String discussionName) {
-    _cloudFirestore.collection("discussions").add({"name": discussionName});
+    Map<String, dynamic> _discussion = {
+      "name": discussionName,
+      "creatorID": activeUser.uid
+    };
+
+    _cloudFirestore.collection(_discussionCollection).add(_discussion);
     notifyListeners();
   }
 
@@ -36,15 +45,24 @@ class ChatController extends ChangeNotifier {
       'date': DateTime.now().toIso8601String()
     };
 
-    try {
-      _cloudFirestore
-          .collection("discussions")
-          .document(discussionId)
-          .collection("chat")
-          .add(_postData);
-    } catch (error) {
+    _cloudFirestore
+        .collection(_discussionCollection)
+        .document(discussionId)
+        .collection(_discussionChat)
+        .add(_postData)
+        .catchError((error) => print(error));
+  }
+
+  deleteDiscussion(String discussionId) {
+    _cloudFirestore
+        .collection(_discussionCollection)
+        .document(discussionId)
+        .delete()
+        .then((value) {
+      return notifyListeners();
+    }).catchError((error) {
       print(error);
-    }
+    });
   }
 
   Future<FirebaseUser> checkIdentity({

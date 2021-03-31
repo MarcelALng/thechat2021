@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 
 import 'components/appbar_component.dart';
 import 'components/floating_action_component.dart';
+import 'components/alert_dialog_component.dart';
 import 'package:thechat2021/controllers/chat_controller.dart';
 
 import 'package:thechat2021/constants/global_constant.dart';
@@ -58,6 +59,21 @@ class UserHomeScreen extends StatelessWidget {
                           Container(
                             color: Colors.white,
                             child: ListTile(
+                              onLongPress: () {
+                                bool _isCreator = discussions.data
+                                            .documents[item]["creatorID"] ==
+                                        _controller.activeUser.uid
+                                    ? true
+                                    : false;
+                                if (_isCreator) {
+                                  showDialog(
+                                      context: context,
+                                      builder: (context) {
+                                        return ComponentAlertDialog(discussions
+                                            .data.documents[item].documentID);
+                                      });
+                                }
+                              },
                               onTap: () => Navigator.pushNamed(
                                   context, RoutesConstant.userChat,
                                   arguments: discussions
